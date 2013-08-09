@@ -139,7 +139,16 @@ module.exports = function (grunt) {
                     src: '{,*/}*.coffee',
                     dest: '.tmp/scripts',
                     ext: '.js'
-                }]
+                },
+                {
+                    expand: true,
+                    cwd: 'server',
+                    src: '{,*/}*.coffee',
+                    dest: '',
+                    ext: '.js'
+                }
+
+                ]
             },
             test: {
                 files: [{
@@ -169,6 +178,14 @@ module.exports = function (grunt) {
             server: {
                 options: {
                     debugInfo: true
+                }
+            }
+        },
+        nodemon: {
+            dist: {
+            options: {
+                    file: './server/server.js',
+                    debug: true,
                 }
             }
         },
@@ -280,7 +297,8 @@ module.exports = function (grunt) {
             server: [
                 'emberTemplates',
                 'coffee:dist',
-                'compass:server'
+                'compass:server',
+                'nodemon'
             ],
             test: [
                 'emberTemplates',
